@@ -4,7 +4,7 @@ import { Button } from './components/Button';
 import { useAuth } from './AuthContext';
 
 export function LoginForm() {
-    const { user, loading: authLoading, login, logout } = useAuth();
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -27,6 +27,7 @@ export function LoginForm() {
         setSubmitting(true);
         try {
             await login(email, password);
+            // La redirección la hace LoginPage con useNavigate/Navigate
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Error desconocido';
             setError(message);
@@ -35,28 +36,19 @@ export function LoginForm() {
         }
     };
 
-    if (authLoading) {
-        return <p className="text-slate-500">Cargando...</p>;
-    }
-
-    if (user) {
-        return (
-            <div className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 text-center">
-                <h1 className="text-2xl font-bold text-slate-800">Bienvenido</h1>
-                <p className="text-slate-600">{user.email}</p>
-                <Button onClick={logout}>Cerrar sesión</Button>
-            </div>
-        );
-    }
-
     return (
-        <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md flex flex-col gap-4">
+        <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md flex flex-col gap-4"
+        >
             <h1 className="text-2xl font-bold text-slate-800 text-center">Iniciar sesión</h1>
 
             <Input label="Email" type="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
             <Input label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
 
-            {error && <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-2">{error}</p>}
+            {error && (
+                <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-2">{error}</p>
+            )}
 
             <Button type="submit" disabled={submitting}>
                 {submitting ? 'Entrando...' : 'Entrar'}
