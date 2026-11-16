@@ -4,7 +4,9 @@ import type {
     AdminTransfer,
     AdminUser,
     CreateAccountPayload,
+    CreateAccountResult,
     UpdateUserPayload,
+    UpdateUserResult,
 } from './admin.types';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -40,13 +42,13 @@ export async function getTransfers(): Promise<AdminTransfer[]> {
     return handle<AdminTransfer[]>(res);
 }
 
-export async function updateUser(id: string, data: UpdateUserPayload): Promise<AdminUser> {
+export async function updateUser(id: string, data: UpdateUserPayload): Promise<UpdateUserResult> {
     const res = await fetch(`${API_URL}/admin/users/${id}`, {
         method: 'PATCH',
         headers: authHeaders(),
         body: JSON.stringify(data),
     });
-    return handle<AdminUser>(res);
+    return handle<UpdateUserResult>(res);
 }
 
 export async function updateAccountStatus(
@@ -61,11 +63,11 @@ export async function updateAccountStatus(
     return handle<AdminAccount>(res);
 }
 
-export async function createAccount(data: CreateAccountPayload): Promise<AdminAccount> {
+export async function createAccount(data: CreateAccountPayload): Promise<CreateAccountResult> {
     const res = await fetch(`${API_URL}/admin/accounts`, {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify(data),
     });
-    return handle<AdminAccount>(res);
+    return handle<CreateAccountResult>(res);
 }

@@ -37,6 +37,22 @@ export type CreateAccountPayload = {
     initialBalance?: number;
 };
 
+export type CreateAccountResult = {
+    id: string;
+    accountNumber: string;
+    balance: number;
+    owner: { email: string; name: string };
+};
+
+export type UpdateUserResult = {
+    id: string;
+    email: string;
+    name: string;
+    role: UserRole;
+    isActive: boolean;
+    updatedAt: string;
+};
+
 export type UpdateUserPayload = {
     name?: string;
     password?: string;
