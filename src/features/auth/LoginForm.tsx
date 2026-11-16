@@ -1,40 +1,11 @@
-import { useState } from 'react';
 import { Input } from './components/Input';
 import { Button } from './components/Button';
-import { useAuth } from './AuthContext';
+import { useLoginForm } from './hooks/useLoginForm';
+import { Link } from 'react-router-dom';
 
 export function LoginForm() {
-    const { login } = useAuth();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState<string | null>(null);
-    const [submitting, setSubmitting] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(null);
-
-        if (!email || !password) {
-            setError('Email y contraseña son obligatorios');
-            return;
-        }
-
-        if (!email.includes('@')) {
-            setError('El email no es válido');
-            return;
-        }
-
-        setSubmitting(true);
-        try {
-            await login(email, password);
-            // La redirección la hace LoginPage con useNavigate/Navigate
-        } catch (err) {
-            const message = err instanceof Error ? err.message : 'Error desconocido';
-            setError(message);
-        } finally {
-            setSubmitting(false);
-        }
-    };
+    const { email, password, setEmail, setPassword, error, submitting, handleSubmit } =
+        useLoginForm();
 
     return (
         <form
@@ -53,6 +24,10 @@ export function LoginForm() {
             <Button type="submit" disabled={submitting}>
                 {submitting ? 'Entrando...' : 'Entrar'}
             </Button>
+
+            <p className="text-sm text-center text-slate-600">
+                ¿No tienes cuenta? <Link to="/register" className="text-blue-600 hover:underline">Regístrate</Link>
+            </p>
         </form>
     );
 }

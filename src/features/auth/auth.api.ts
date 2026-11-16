@@ -33,3 +33,43 @@ export async function login(email: string, password: string): Promise<LoginRespo
 
     return res.json();
 }
+
+export type RegisterResponse = {
+    id: string;
+    email: string;
+    name: string;
+};
+
+export async function register(
+    email: string,
+    password: string,
+    name: string
+): Promise<RegisterResponse> {
+    const res = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, name }),
+    });
+
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.message || `Error ${res.status}`);
+    }
+
+    return res.json();
+}
+
+export async function refresh(refreshToken: string): Promise<{ accessToken: string }> {
+    const res = await fetch(`${API_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken }),
+    });
+
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.message || `Error ${res.status}`);
+    }
+
+    return res.json();
+}

@@ -12,7 +12,7 @@ export function DashboardPage() {
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-800">Dashboard</h1>
-                        <p className="text-slate-600">{user.email}</p>
+                        <p className="text-slate-600">{user.name ?? user.email}</p>
                         <p className="text-sm text-slate-400">Rol: {user.role}</p>
                     </div>
                     <Button onClick={logout}>Cerrar sesión</Button>
