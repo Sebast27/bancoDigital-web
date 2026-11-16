@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { Button } from '../auth/components/Button';
 
@@ -17,6 +18,15 @@ export function DashboardPage() {
                     </div>
                     <Button onClick={logout}>Cerrar sesión</Button>
                 </div>
+
+                {user.role === 'ADMIN' && (
+                    <Link
+                        to="/admin"
+                        className="inline-block mb-4 text-blue-600 hover:underline text-sm font-medium"
+                    >
+                        Ir al panel de administración →
+                    </Link>
+                )}
 
                 <div className="border-t border-slate-200 pt-4">
                     <p className="text-slate-500">Aquí irán las transferencias, depósitos, etc.</p>
