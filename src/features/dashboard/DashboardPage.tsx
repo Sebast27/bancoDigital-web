@@ -30,6 +30,28 @@ export function DashboardPage() {
                     </Link>
                 )}
 
+                {user.role === 'USER' && (
+                    <Link
+                        to="/transfers/new"
+                        className="inline-block mb-4 mr-4 text-blue-600 hover:underline text-sm font-medium"
+                    >
+                        + Nueva transferencia
+                    </Link>
+
+                ) && (
+                        <Link to="/deposits/new" className="text-blue-600 hover:underline text-sm font-medium">
+                            + Depósito
+                        </Link>
+                    ) && (
+                        <Link to="/withdrawals/new" className="text-blue-600 hover:underline text-sm font-medium">
+                            + Retiro
+                        </Link>
+                    ) && (
+                        <Link to="/statements/new" className="text-blue-600 hover:underline text-sm font-medium">
+                            + Estado de cuenta
+                        </Link>
+                    )}
+
                 <div className="border-t border-slate-200 pt-4 mt-4">
                     <h2 className="text-sm font-medium text-slate-700 mb-2">Mis cuentas</h2>
                     {accounts.isLoading && <p className="text-sm text-slate-500">Cargando...</p>}
