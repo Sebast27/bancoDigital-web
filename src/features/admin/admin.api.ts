@@ -1,8 +1,10 @@
 import type {
     AccountStatus,
     AdminAccount,
+    AdminDeposit,
     AdminTransfer,
     AdminUser,
+    AdminWithdrawal,
     CreateAccountPayload,
     CreateAccountResult,
     UpdateUserPayload,
@@ -71,3 +73,13 @@ export async function createAccount(data: CreateAccountPayload): Promise<CreateA
     });
     return handle<CreateAccountResult>(res);
 }
+
+export async function getDeposits(): Promise<AdminDeposit[]> {
+    const res = await fetch(`${API_URL}/admin/deposits`, { headers: authHeaders() });
+    return handle<AdminDeposit[]>(res);
+}
+
+export async function getWithdrawals(): Promise<AdminWithdrawal[]> {
+    const res = await fetch(`${API_URL}/admin/withdrawals`, { headers: authHeaders() });
+    return handle<AdminWithdrawal[]>(res);
+}   

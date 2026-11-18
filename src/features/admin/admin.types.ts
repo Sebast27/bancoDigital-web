@@ -59,3 +59,27 @@ export type UpdateUserPayload = {
     role?: UserRole;
     isActive?: boolean;
 };
+
+export type AdminDeposit = {
+    id: string;
+    accountNumber: string;
+    amount: number;
+    status: 'PENDING' | 'APPROVED' | 'COMPLETED' | 'FAILED';
+    requestedBy: string;
+    approvedBy: string | null;
+    reference: string | null;
+    createdAt: string;
+    approvedAt: string | null;
+    completedAt: string | null;
+};
+
+export type AdminWithdrawal = {
+    id: string;
+    accountNumber: string;
+    amount: number;
+    status: 'PENDING' | 'COMPLETED' | 'FAILED';
+    requestedBy: string;
+    reference: string | null;
+    createdAt: string;
+    completedAt: string | null;
+};

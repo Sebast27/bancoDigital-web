@@ -5,7 +5,8 @@ const links = [
     { to: '/admin/users', label: 'Usuarios' },
     { to: '/admin/accounts', label: 'Cuentas' },
     { to: '/admin/transfers', label: 'Transferencias' },
-    { to: '/admin/deposits', label: 'Depósitos pendientes' },
+    { to: '/admin/deposits', label: 'Depósitos' },
+    { to: '/admin/withdrawals', label: 'Retiros' },
 ];
 
 export function AdminLayout() {
