@@ -66,7 +66,14 @@ export function RegisterForm() {
             )}
 
             <Button type="submit" disabled={submitting}>
-                {submitting ? 'Creando...' : 'Crear cuenta'}
+                {submitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                        <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                        Creando...
+                    </span>
+                ) : (
+                    'Crear cuenta'
+                )}
             </Button>
 
             <p className="text-sm text-center text-slate-600">

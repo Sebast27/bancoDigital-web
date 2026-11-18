@@ -65,9 +65,6 @@ export function TransferStatusPage() {
                 )}
 
                 <div className="mt-6 flex gap-3">
-                    <Link to="/dashboard" className="text-blue-600 hover:underline text-sm">
-                        ← Volver al dashboard
-                    </Link>
                     <Link to="/transfers/new" className="text-blue-600 hover:underline text-sm">
                         Nueva transferencia
                     </Link>

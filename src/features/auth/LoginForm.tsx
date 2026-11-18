@@ -10,10 +10,8 @@ export function LoginForm() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full max-w-sm bg-white p-6 rounded-lg shadow-md flex flex-col gap-4"
+            className="w-full bg-white p-6 rounded-lg shadow-md flex flex-col gap-4"
         >
-            <h1 className="text-2xl font-bold text-slate-800 text-center">Iniciar sesión</h1>
-
             <Input label="Email" type="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
             <Input label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
 
@@ -22,7 +20,14 @@ export function LoginForm() {
             )}
 
             <Button type="submit" disabled={submitting}>
-                {submitting ? 'Entrando...' : 'Entrar'}
+                {submitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                        <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                        Entrando...
+                    </span>
+                ) : (
+                    'Entrar'
+                )}
             </Button>
 
             <p className="text-sm text-center text-slate-600">

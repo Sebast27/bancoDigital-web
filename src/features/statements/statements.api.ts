@@ -49,3 +49,16 @@ export async function downloadStatement(id: string): Promise<void> {
     a.remove();
     URL.revokeObjectURL(url);
 }
+
+export async function getStatementPdfBlobUrl(id: string): Promise<string> {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const res = await fetch(`${API_URL}/statements/${id}/download`, {
+        headers: authHeaders(),
+    });
+
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+
+    const blob = await res.blob();
+    // Creamos una URL temporal (blob:) que el navegador puede leer
+    return URL.createObjectURL(blob);
+}

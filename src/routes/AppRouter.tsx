@@ -11,51 +11,52 @@ import { WithdrawalForm } from '../features/withdrawals/WithdrawalForm';
 import { WithdrawalStatusPage } from '../features/withdrawals/WithdrawalStatusPage';
 import { StatementForm } from '../features/statements/StatementForm';
 import { StatementStatusPage } from '../features/statements/StatementStatusPage';
-import { ProtectedRoute } from './ProtectedRoute';
-import { AdminRoute } from './AdminRoute';
-import { AdminLayout } from '../features/admin/AdminLayout';
 import { AdminUsersPage } from '../features/admin/AdminUsersPage';
 import { AdminAccountsPage } from '../features/admin/AdminAccountsPage';
 import { AdminTransfersPage } from '../features/admin/AdminTransfersPage';
 import { AdminDepositsPage } from '../features/admin/AdminDepositsPage';
 import { AdminWithdrawalsPage } from '../features/admin/AdminWithdrawalsPage';
-import { AdminPendingDepositsPage } from '../features/deposits/AdminPendingDepositsPage';
+import { ProtectedRoute } from './ProtectedRoute';
+import { AdminRoute } from './AdminRoute';
+import { AppLayout } from '../components/layout/AppLayout';
 
 export function AppRouter() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Públicas */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                {/* Protegidas */}
-                <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-                <Route path="/accounts/:accountNumber" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
+                {/* TODAS las rutas de la app (User y Admin) viven dentro del AppLayout */}
+                <Route
+                    element={
+                        <ProtectedRoute>
+                            <AppLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    {/* Dashboard principal (sirve para User y Admin) */}
+                    <Route path="/dashboard" element={<DashboardPage />} />
 
-                <Route path="/transfers/new" element={<ProtectedRoute><TransferForm /></ProtectedRoute>} />
-                <Route path="/transfers/:id" element={<ProtectedRoute><TransferStatusPage /></ProtectedRoute>} />
+                    {/* Rutas de Usuario */}
+                    <Route path="/accounts/:accountNumber" element={<AccountPage />} />
+                    <Route path="/transfers/new" element={<TransferForm />} />
+                    <Route path="/transfers/:id" element={<TransferStatusPage />} />
+                    <Route path="/deposits/new" element={<DepositForm />} />
+                    <Route path="/deposits/:id" element={<DepositStatusPage />} />
+                    <Route path="/withdrawals/new" element={<WithdrawalForm />} />
+                    <Route path="/withdrawals/:id" element={<WithdrawalStatusPage />} />
+                    <Route path="/statements/new" element={<StatementForm />} />
+                    <Route path="/statements/:id" element={<StatementStatusPage />} />
 
-                <Route path="/deposits/new" element={<ProtectedRoute><DepositForm /></ProtectedRoute>} />
-                <Route path="/deposits/:id" element={<ProtectedRoute><DepositStatusPage /></ProtectedRoute>} />
-
-                <Route path="/withdrawals/new" element={<ProtectedRoute><WithdrawalForm /></ProtectedRoute>} />
-                <Route path="/withdrawals/:id" element={<ProtectedRoute><WithdrawalStatusPage /></ProtectedRoute>} />
-
-                <Route path="/statements/new" element={<ProtectedRoute><StatementForm /></ProtectedRoute>} />
-                <Route path="/statements/:id" element={<ProtectedRoute><StatementStatusPage /></ProtectedRoute>} />
-
-                {/* Admin */}
-                <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
-                    <Route index element={<Navigate to="/admin/users" replace />} />
-                    <Route path="users" element={<AdminUsersPage />} />
-                    <Route path="accounts" element={<AdminAccountsPage />} />
-                    <Route path="transfers" element={<AdminTransfersPage />} />
-                    <Route path="deposits" element={<AdminDepositsPage />} />
-                    <Route path="withdrawals" element={<AdminWithdrawalsPage />} />
+                    {/* Rutas de Admin (Protegidas por el AdminRoute) */}
+                    <Route path="/admin/users" element={<AdminRoute><AdminUsersPage /></AdminRoute>} />
+                    <Route path="/admin/accounts" element={<AdminRoute><AdminAccountsPage /></AdminRoute>} />
+                    <Route path="/admin/transfers" element={<AdminRoute><AdminTransfersPage /></AdminRoute>} />
+                    <Route path="/admin/deposits" element={<AdminRoute><AdminDepositsPage /></AdminRoute>} />
+                    <Route path="/admin/withdrawals" element={<AdminRoute><AdminWithdrawalsPage /></AdminRoute>} />
                 </Route>
 
-                {/* Redirecciones y catch-all */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
