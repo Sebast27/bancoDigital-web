@@ -4,7 +4,6 @@ import { useMyAccounts } from '../accounts/accounts.hooks';
 import { AccountStatusBadge } from '../accounts/components/AccountStatusBadge';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { AccountsListSkeleton } from '../accounts/components/AccountSkeleton';
-import { useAdminDeposits } from '../admin/admin.hooks'; // Lo usaremos para métricas
 import { usePendingDeposits } from '../deposits/deposits.hooks';
 
 export function DashboardPage() {

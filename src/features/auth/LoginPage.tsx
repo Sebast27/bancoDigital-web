@@ -33,7 +33,7 @@ export function LoginPage() {
                             <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.95 3.48L12 11.14 5.05 7.66 12 4.18z" />
                         </svg>
                     </div>
-                    <h1 className="text-2xl font-bold text-slate-800">Transfer Bank</h1>
+                    <h1 className="text-2xl font-bold text-slate-800">Banco Digital</h1>
                     <p className="text-sm text-slate-500">Inicia sesión en tu cuenta</p>
                 </div>
                 <LoginForm />
