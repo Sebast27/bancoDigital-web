@@ -1,75 +1,40 @@
-# React + TypeScript + Vite
+# 🏦 Banco Digital - Full Stack App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación bancaria completa (Home Banking) que simula un entorno de Core Banking real, con procesamiento asíncrono, separación de roles y una interfaz de usuario premium.
 
-Currently, two official plugins are available:
+## 🚀 Demo en Vivo
+- **Frontend (Vercel):** [https://tu-link-de-vercel.app](https://tu-link-de-vercel.app)
+- **Backend API (Render):** [https://bancodigital-app.onrender.com/api/docs](https://bancodigital-app.onrender.com/api/docs)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*(Nota: El backend usa el plan gratuito de Render, por lo que puede tardar ~40 segundos en "despertar" tras un periodo de inactividad).*
 
-## React Compiler
+## 📸 Capturas de Pantalla
+*(Aquí debes subir las fotos que me enviaste: El Dashboard oscuro, el Panel de Control de Admin, el Formulario de Transferencias paso a paso).*
+<!-- Ejemplo: -->
+<!-- ![Login](ruta-a-tu-imagen.png) -->
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tecnologías y Arquitectura
 
-## Expanding the ESLint configuration
+**Frontend:**
+- React 18 + TypeScript + Vite
+- Tailwind CSS (Diseño responsivo y moderno)
+- TanStack Query (Manejo de estado asíncrono y Polling)
+- React Router v6 (Rutas protegidas por roles)
+- Sonner (Notificaciones Toast)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Backend:**
+- NestJS + TypeScript (Arquitectura Hexagonal)
+- PostgreSQL + Prisma ORM
+- Redis + BullMQ (Colas y Workers asíncronos)
+- JWT (Autenticación con Access y Refresh Tokens)
+- Swagger (Documentación de API)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Características Principales
+- **Roles separados:** Cliente (transacciones) y Administrador/Auditor (aprobación de depósitos, gestión de cuentas).
+- **Asincronía real:** Transferencias, depósitos y generación de PDFs se procesan en segundo plano con BullMQ. El frontend usa polling para actualizar el estado sin recargar la página.
+- **Seguridad:** Rutas protegidas en el frontend y validaciones estrictas con Guards y DTOs en el backend.
+- **Generación de PDF:** Estados de cuenta generados en el servidor y previsualizados en el navegador.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+## 🔐 Credenciales de Prueba
+- **Usuario (Cliente):** `user@test.com` / `Password123!`
+- **Administrador:** `admin@test.com` / `Admin123!`
